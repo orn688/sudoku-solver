@@ -9,12 +9,10 @@ export default class Sudoku extends React.Component {
     super(props);
 
     this.state = {
-      squares: [],
+      squares: Array(globals.puzzleSize ** 2).fill(""),
       valid: true,
       solveTime: 0
     };
-
-    this.reset();
   }
 
   render() {
