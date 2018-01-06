@@ -4,35 +4,30 @@ import globals from "./globals";
 
 export default class SudokuBoard extends React.Component {
   render() {
-    const rows = [];
-    for (let row = 0; row < globals.puzzleSize; row++) {
-      rows.push(this.renderRow(row));
-    }
-
-    return <div>{rows}</div>;
-  }
-
-  renderRow(row) {
     const squares = [];
-    const startIndex = globals.puzzleSize * row;
 
-    for (let col = 0; col < globals.puzzleSize; col++) {
-      squares.push(this.renderSquare(startIndex + col));
+    for (let row = 0; row < globals.puzzleSize; row++) {
+      for (let col = 0; col < globals.puzzleSize; col++) {
+        squares.push(this.renderSquare(row, col));
+      }
     }
 
     return (
-      <div className="sudoku-row" key={row}>
+      <div class="sudoku-board-container">
         {squares}
       </div>
     );
   }
 
-  renderSquare(i) {
+  renderSquare(row, col) {
+    let index = globals.puzzleSize * row + col;
     return (
       <Square
-        value={this.props.squares[i]}
-        onChange={event => this.props.onChange(i, event)}
-        key={i}
+        value={this.props.squares[index]}
+        row={row}
+        col={col}
+        onChange={event => this.props.onChange(index, event)}
+        key={index}
       />
     );
   }
