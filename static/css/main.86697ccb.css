@@ -1,2 +1,0 @@
-body{font:14px sans-serif;margin:20px}.sudoku-board-container{font-family:Times New Roman,Times,serif;display:grid;grid-template:repeat(9,34px)/repeat(9,34px)}.square{background:#fff;float:left;font-size:24px;margin:-1px;padding:0;text-align:center}.square:focus{outline:none}.kbd-navigation .square:focus{background:#ddd}.sudoku{display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column}.game-info{margin-left:20px}
-/*# sourceMappingURL=main.86697ccb.css.map*/
