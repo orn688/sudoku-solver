@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Button } from "react-bootstrap";
+import { Button, ButtonGroup } from "react-bootstrap";
 import SudokuBoard from "./SudokuBoard";
 import { solve, isValidValue, isValidSudoku } from "./utils";
 import globals from "./globals";
@@ -29,27 +29,41 @@ export default class Sudoku extends React.Component {
       );
     }
 
-    const solveButton = this.state.valid ? (
+    const solveButton = !this.state.solveTime && this.state.valid ? (
       <Button bsStyle="primary" onClick={this.getSolution.bind(this)}>
         Solve
       </Button>
     ) : (
-      <Button bsStyle="primary" onClick={this.getSolution.bind(this)} disabled>
+      <Button bsStyle="primary" disabled>
         Solve
       </Button>
     );
 
     return (
       <div className="sudoku container">
-        {message ? message : <div />}
-        <SudokuBoard
-          squares={this.state.squares.slice()}
-          onChange={this.handleChange.bind(this)}
-        />
-        {solveButton}
-        <Button bsStyle="danger" onClick={this.reset.bind(this)}>
-          Reset
-        </Button>
+        <header>
+          <h1>Sudoku Solver</h1>
+          <h5>Built by <a href="https://www.onewman.com">Oliver Newman</a></h5>
+        </header>
+
+        <div>
+          {message ? message : <div />}
+          <SudokuBoard
+            squares={this.state.squares.slice()}
+            onChange={this.handleChange.bind(this)}
+          />
+          <ButtonGroup className="sudoku-buttons" vertical block>
+            {solveButton}
+            <Button bsStyle="danger" onClick={this.reset.bind(this)}>
+              Reset
+            </Button>
+          </ButtonGroup>
+        </div>
+
+        <footer>
+          &copy; {new Date().getFullYear()} <a
+          href="https://www.onewman.com">Oliver Newman</a>
+        </footer>
       </div>
     );
   }
@@ -62,6 +76,7 @@ export default class Sudoku extends React.Component {
 
       this.setState({
         squares: squares,
+        solveTime: 0,
         valid: isValidSudoku(squares)
       });
     }
@@ -75,7 +90,8 @@ export default class Sudoku extends React.Component {
     if (solution) {
       this.setState({
         squares: solution,
-        solveTime: endTime - startTime
+        solveTime: endTime - startTime,
+        valid: isValidSudoku(solution)
       });
     }
   }

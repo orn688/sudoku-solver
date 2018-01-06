@@ -12,7 +12,7 @@ export default function Square(props) {
     border: squareBorderStyle
   };
 
-  const regionBorderStyle = "2px solid black"
+  const regionBorderStyle = "2px solid black";
 
   if (props.row % globals.regionSize === 0) {
     style.borderTop = regionBorderStyle;
@@ -36,4 +36,10 @@ export default function Square(props) {
       onChange={props.onChange}
     />
   );
+
+  // if (props.isFocus) {
+  //   inputBox.focus()
+  // }
+
+  // return inputBox;
 }
