@@ -8,26 +8,21 @@ export default class Sudoku extends React.Component {
   constructor(props) {
     super(props);
 
-    let squares;
-    if (props.squares) {
-      squares = this.props.squares.map(
-        value => (isValidValue(value) ? value : "")
-      );
-    } else {
-      squares = Array(globals.puzzleSize ** 2).fill("");
-    }
-
     this.state = {
-      squares: squares,
+      squares: [],
       valid: true,
       solveTime: 0
     };
+
+    this.reset();
   }
 
   render() {
     let message = null;
     if (!this.state.valid) {
-      message = <div className="alert alert-danger">Invalid Sudoku puzzle!</div>;
+      message = (
+        <div className="alert alert-danger">Invalid Sudoku puzzle!</div>
+      );
     } else if (this.state.solveTime) {
       message = (
         <div className="alert alert-success">
@@ -49,23 +44,19 @@ export default class Sudoku extends React.Component {
     return (
       <div className="sudoku container">
         {message ? message : <div />}
-        <Row className="sudoku-board">
-          <Col xs={12}>
-            <SudokuBoard
-              squares={this.state.squares.slice()}
-              onChange={this.handleChange.bind(this)}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>{solveButton}</Col>
-        </Row>
+        <SudokuBoard
+          squares={this.state.squares.slice()}
+          onChange={this.handleChange.bind(this)}
+        />
+        {solveButton}
+        <Button bsStyle="danger" onClick={this.reset.bind(this)}>
+          Reset
+        </Button>
       </div>
     );
   }
 
   handleChange(i, event) {
-    console.log(this);
     const squares = this.state.squares.slice();
 
     if (event.target.value === "" || isValidValue(event.target.value)) {
@@ -89,5 +80,13 @@ export default class Sudoku extends React.Component {
         solveTime: endTime - startTime
       });
     }
+  }
+
+  reset() {
+    this.setState({
+      squares: Array(globals.puzzleSize ** 2).fill(""),
+      valid: true,
+      solveTime: 0
+    });
   }
 }
