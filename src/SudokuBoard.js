@@ -13,7 +13,7 @@ export default class SudokuBoard extends React.Component {
     }
 
     return (
-      <div class="sudoku-board-container">
+      <div className="sudoku-board-container">
         {squares}
       </div>
     );

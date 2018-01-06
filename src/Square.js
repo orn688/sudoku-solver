@@ -14,16 +14,16 @@ export default function Square(props) {
 
   const regionBorderStyle = "2px solid black"
 
-  if (props.row % globals.regionSize == 0) {
+  if (props.row % globals.regionSize === 0) {
     style.borderTop = regionBorderStyle;
   }
-  if (props.row % globals.regionSize == globals.regionSize - 1) {
+  if (props.row % globals.regionSize === globals.regionSize - 1) {
     style.borderBottom = regionBorderStyle;
   }
-  if (props.col % globals.regionSize == 0) {
+  if (props.col % globals.regionSize === 0) {
     style.borderLeft = regionBorderStyle;
   }
-  if (props.col % globals.regionSize == globals.regionSize - 1) {
+  if (props.col % globals.regionSize === globals.regionSize - 1) {
     style.borderRight = regionBorderStyle;
   }
 

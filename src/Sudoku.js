@@ -27,10 +27,10 @@ export default class Sudoku extends React.Component {
   render() {
     let message = null;
     if (!this.state.valid) {
-      message = <div class="alert alert-danger">Invalid Sudoku puzzle!</div>;
+      message = <div className="alert alert-danger">Invalid Sudoku puzzle!</div>;
     } else if (this.state.solveTime) {
       message = (
-        <div class="alert alert-success">
+        <div className="alert alert-success">
           Solved in {this.state.solveTime / 1000} seconds!
         </div>
       );
