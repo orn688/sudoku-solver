@@ -11,6 +11,7 @@ export default class Sudoku extends React.Component {
     this.state = {
       squares: Array(globals.puzzleSize ** 2).fill(""),
       valid: true,
+      solved: false,
       solveTime: 0
     };
   }
@@ -21,7 +22,7 @@ export default class Sudoku extends React.Component {
       message = (
         <div className="alert alert-danger">Invalid Sudoku puzzle!</div>
       );
-    } else if (this.state.solveTime) {
+    } else if (this.state.solved) {
       message = (
         <div className="alert alert-success">
           Solved in {this.state.solveTime / 1000} seconds!
@@ -30,7 +31,7 @@ export default class Sudoku extends React.Component {
     }
 
     const solveButton =
-      !this.state.solveTime && this.state.valid ? (
+      !this.state.solved && this.state.valid ? (
         <Button bsStyle="primary" onClick={this.getSolution.bind(this)}>
           Solve
         </Button>
@@ -89,6 +90,7 @@ export default class Sudoku extends React.Component {
       this.setState({
         squares: squares,
         solveTime: 0,
+        solved: false,
         valid: isValidSudoku(squares)
       });
     }
@@ -103,6 +105,7 @@ export default class Sudoku extends React.Component {
       this.setState({
         squares: solution,
         solveTime: endTime - startTime,
+        solved: true,
         valid: isValidSudoku(solution)
       });
     }
@@ -112,6 +115,7 @@ export default class Sudoku extends React.Component {
     this.setState({
       squares: Array(globals.puzzleSize ** 2).fill(""),
       valid: true,
+      solved: false,
       solveTime: 0
     });
   }
